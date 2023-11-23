@@ -152,14 +152,17 @@ public abstract class Planeta {
 
 	public void aumentarMovimento() {
 		this.movimento++;
+		System.out.println(nome+ "Movimento aumentado para : " + this.movimento + " unidades");
 	}
 
 	public void diminuirMovimento() {
 		this.movimento--;
+		System.out.println("Movimento diminuido para :" + this.movimento);
 	}
 
 	public void aumentarAnoPorRodada() {
 		this.anoPorRodada++;
+		
 	}
 
 	public void aumentarAnosTotais() {

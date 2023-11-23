@@ -9,7 +9,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import model.Célula;
-import model.Planeta;
 import model.Plano;
 
 public class PainelJavaLar extends JPanel {
@@ -18,7 +17,6 @@ public class PainelJavaLar extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final int NUM_COLUNAS = 15;
 	private Plano p;
 
 	public PainelJavaLar(Plano plano) {

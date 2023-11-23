@@ -15,27 +15,28 @@ public class Python extends Planeta {
 	public void mover(int movimento) {
 	    for (int i = 0; i < movimento; i++) {
 	        if (direcao == 0) {
-	            x--;
+	        	 setX(getX() - 1);
 	            if (x == 7 && y == 7) {
 	                direcao = 1;
 	            }
 	        } else if (direcao == 1) {
-	            y++;
+	        	setY(getY() + 1);
 	            if (x == 7 && y == 9) {
 	                direcao = 2;
 	            }
 	        } else if (direcao == 2) {
-	            x++;
+	        	setX(getX() + 1);
 	            if (x == 9 && y == 9) {
 	                direcao = 3;
 	            }
 	        } else if (direcao == 3) {
-	            y--;
+	        	setY(getY() - 1);
 	            if (x == 9 && y == 7) {
 	                direcao = 0;
 	            }
 	        }
 	    }
+
 //		if (passouPelaCoordenada(8, 9)) {
 //			aumentarAnoPorRodada();
 //			aumentarAnosTotais();

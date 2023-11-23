@@ -8,11 +8,16 @@ public class Célula {
 	public int posiçãoY;
 	public ImageIcon icon;
 	public JLabel label;
+	public Planeta planetas;
+	public Devs devs;
+	public Bugs bugs;
 
 	public Célula(int x,int y, JLabel label){
 		this.posiçãoX=x;
 		this.posiçãoY=y;
 		this.label=label;
+		devs=null;
+		bugs=null;
 	}
 
 	public int getPosiçãoX() {

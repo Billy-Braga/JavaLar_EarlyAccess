@@ -14,7 +14,7 @@ class Cplusplus extends Planeta {
 	@Override
 	public void mover(int movimento) {
 
-		for (int i = 0; i < movimento; i++) {
+		for (int i = 0; i <movimento; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 2 && y == 2) {
