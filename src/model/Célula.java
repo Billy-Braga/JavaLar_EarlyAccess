@@ -16,8 +16,7 @@ public class Célula {
 		this.posiçãoX=x;
 		this.posiçãoY=y;
 		this.label=label;
-		devs=null;
-		bugs=null;
+
 	}
 
 	public int getPosiçãoX() {

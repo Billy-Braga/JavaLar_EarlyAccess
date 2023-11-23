@@ -10,13 +10,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 
-
 public class Plano {
 	public ArrayList<Célula> listaCélulas;
 	public List<Planeta> planetas = new ArrayList<>();
-	public List<Bugs> listaBugs = new ArrayList<>();
-	public List<Bugs> bugsRemovidos = new ArrayList<>();
-	public List<Devs> listaDevs = new ArrayList<>();
+	public ArrayList<Bugs> listaBugs = new ArrayList<>();
+	public ArrayList<Devs> listaDevs = new ArrayList<>();
 
 	public Plano() {
 
@@ -61,14 +59,14 @@ public class Plano {
 		}
 		for (Planeta planeta : planetas) {
 			for (Célula célula : listaCélulas) {
-				if (planeta.getX()==célula.getPosiçãoX() && planeta.getY()== célula.getPosiçãoY()) {
+				if (planeta.getX() == célula.getPosiçãoX() && planeta.getY() == célula.getPosiçãoY()) {
 					célula.label.setIcon(planeta.getImagem());
 				}
 			}
 		}
 	}
 
-	public void verificarColisãoBugs(List<Bugs> bugsRemovidos) {
+	public void verificarColisãoBugs(ArrayList<Bugs> bugsRemovidos) {
 		for (Planeta planeta : planetas) {
 			for (Bugs bug : listaBugs) {
 				if (planeta.getX() == bug.getPosicaoX() && planeta.getY() == bug.getPosicaoY()) {
@@ -81,10 +79,12 @@ public class Plano {
 			}
 			listaBugs.removeAll(bugsRemovidos);
 		}
-
+		for (Bugs bugRemovido : bugsRemovidos) {
+			System.out.println("Bug removido: " + bugRemovido.getPosicaoX() + ", " + bugRemovido.getPosicaoY());
+		}
 	}
 
-	public void verificarColisãoDevs(List<Devs> devsRemovidos) {
+	public void verificarColisãoDevs(ArrayList<Devs> devsRemovidos) {
 		for (Planeta planeta : planetas) {
 			for (Devs dev : listaDevs) {
 				if (planeta.getX() == dev.getPosicaoX() && planeta.getY() == dev.getPosicaoY()) {
@@ -97,15 +97,19 @@ public class Plano {
 			}
 			listaDevs.removeAll(devsRemovidos);
 		}
+
+		for (Devs devRemovido : devsRemovidos) {
+			System.out.println("Dev removido: " + devRemovido.getPosicaoX() + ", " + devRemovido.getPosicaoY());
+		}
 	}
-	
-	public void explodirPlanetas() {
+
+	public void explodirPlanetas(ArrayList<Planeta> falecidos) {
 		for (Planeta planeta : planetas) {
 			if (planeta.getMovimento() == 0) {
-				for (Célula célula : listaCélulas) {
+				System.out.println("O planeta :" + planeta.getNome() + "explodiu!");
 
-				}
 			}
 		}
+		planetas.removeAll(falecidos);
 	}
 }

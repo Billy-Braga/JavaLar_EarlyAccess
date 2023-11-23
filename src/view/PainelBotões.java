@@ -16,49 +16,45 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import control.Controlador;
+
 import model.Bugs;
 import model.Devs;
 import model.Planeta;
 import model.Plano;
 
-public class PainelBotões extends JPanel implements ActionListener{
+public class PainelBotões extends JPanel implements ActionListener {
 
 	private BotõesJavaLar botãoInstante, botãoLerArquivo, botãoRelatório, botãoLerDados, botãoGravar;
-	private Controlador controlador;
 	private List<Planeta> planetas;
 	private List<Bugs> listaBugs = new ArrayList<>();
-	private List<Bugs> bugsRemovidos = new ArrayList<>();
-	private List<Devs> devsRemovidos = new ArrayList<>();
+	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
+	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
 	private PainelJavaLar painelJavaLar;
 	private JLabel instantes;
 	private JLabel título;
 	private Plano plano;
-	
-	
 
 	public PainelBotões(List<Planeta> planetas, PainelJavaLar painelJavaLar) {
-		
-		this.plano=plano;
-		this.controlador= new Controlador(plano);
-		this.painelJavaLar= painelJavaLar;
+
+		this.plano = plano;
+		this.painelJavaLar = painelJavaLar;
 		this.planetas = planetas;
-		
+
 		ImageIcon navezona = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\talvez.gif");
 
-		
-		instantes= new JLabel("Selecione a quantidade de instantes:");
-		instantes.setForeground(new Color(201,218,248));
+		instantes = new JLabel("Selecione a quantidade de instantes:");
+		instantes.setForeground(new Color(201, 218, 248));
 		instantes.setFont(new Font("Old English Text MT", Font.BOLD, 17));
-		título= new JLabel("                                           Selecionar Instantes");
-		título.setForeground(new Color(81, 37, 125));;
-		
+		título = new JLabel("                                           Selecionar Instantes");
+		título.setForeground(new Color(81, 37, 125));
+		;
+
 		botãoInstante = new BotõesJavaLar("Processar próximo instante");
 		botãoLerArquivo = new BotõesJavaLar("Ler novo arquivo de entrada");
 		botãoRelatório = new BotõesJavaLar("Gravar Relatório");
 		botãoLerDados = new BotõesJavaLar("Ler dados de outros\n participantes");
 		botãoGravar = new BotõesJavaLar("Gravar arquivo de saída");
-		this.setBackground(new Color(21,21,43));
+		this.setBackground(new Color(21, 21, 43));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(BorderFactory.createMatteBorder(-1, -1, -1, -1, navezona));
 
@@ -78,10 +74,9 @@ public class PainelBotões extends JPanel implements ActionListener{
 		this.setVisible(true);
 		botãoInstante.addActionListener(this);
 		botãoLerArquivo.addActionListener(this);
-		
+
 	}
-	
-	
+
 	public BotõesJavaLar getBotãoInstante() {
 		return botãoInstante;
 	}
@@ -92,40 +87,44 @@ public class PainelBotões extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()== botãoInstante) {
-			for(Planeta planeta : planetas) {
+		 List<Bugs> bugsRemovidos = new ArrayList<>();
+		 List<Devs> devsRemovidos = new ArrayList<>();
+		 
+		if (e.getSource() == botãoInstante) {
+			for (Planeta planeta : planetas) {
 				int movimento = planeta.getMovimento();
 				planeta.mover(movimento);
 			}
-			
-			for(int i=0; i<3;i++) {
+
+			for (int i = 0; i < 3; i++) {
 				Bugs novoBug = new Bugs(painelJavaLar.getPlano());
-				painelJavaLar.getPlano().listaBugs.add(novoBug);
-				
-				
+			    System.out.println("Novo Bug criado: " + novoBug.getPosicaoX() + ", " + novoBug.getPosicaoY());
+			    painelJavaLar.getPlano().listaBugs.add(novoBug);
+
 			}
-			for(int i=0; i<3;i++) {
-				Devs novoDev = new Devs(painelJavaLar.getPlano());
-				painelJavaLar.getPlano().listaDevs.add(novoDev);
-				
+			for (int i = 0; i < 3; i++) {
+			    Devs novoDev = new Devs(painelJavaLar.getPlano());
+			    System.out.println("Novo Dev criado: " + novoDev.getPosicaoX() + ", " + novoDev.getPosicaoY());
+			    painelJavaLar.getPlano().listaDevs.add(novoDev);
+
 			}
-			 painelJavaLar.getPlano().verificarColisãoBugs((List<Bugs>) bugsRemovidos);
-			 painelJavaLar.getPlano().verificarColisãoDevs((List<Devs>) devsRemovidos);
-			 painelJavaLar.getPlano().atualizarPlano(planetas, painelJavaLar.getListaCélulas());
-			painelJavaLar.criarPlano();
+			painelJavaLar.getPlano().atualizarPlano(planetas, painelJavaLar.getListaCélulas());
+			painelJavaLar.getPlano().verificarColisãoBugs((ArrayList<Bugs>) bugsRemovidos);
+			painelJavaLar.getPlano().verificarColisãoDevs((ArrayList<Devs>) devsRemovidos);
+			
 			revalidate();
 			repaint();
 
 		}
 		if (e.getSource() == botãoLerArquivo) {
 			Object[] opções = { "10", "50", "100", "500", "1000", "1500", "2000" };
-			ImageIcon FischerJonatas = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\fesch.png");
-			JOptionPane.showOptionDialog(null, instantes, "                                           Selecionar Instantes",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, FischerJonatas, opções, opções[0]);
-			
-		}
+			ImageIcon FischerJonatas = new ImageIcon(
+					"C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\fesch.png");
+			JOptionPane.showOptionDialog(null, instantes,
+					"                                           Selecionar Instantes", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.INFORMATION_MESSAGE, FischerJonatas, opções, opções[0]);
 
-		
+		}
 
 	};
 }

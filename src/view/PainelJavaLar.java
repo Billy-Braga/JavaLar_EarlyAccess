@@ -20,8 +20,8 @@ public class PainelJavaLar extends JPanel {
 	private Plano p;
 
 	public PainelJavaLar(Plano plano) {
-		
-		this.p=plano;
+
+		this.p = plano;
 		this.setLayout(new GridLayout(15, 15));
 		this.setBackground(new Color(29, 33, 36));
 		this.setPreferredSize(new Dimension(675, 675));
@@ -29,23 +29,23 @@ public class PainelJavaLar extends JPanel {
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.setAlignmentY(CENTER_ALIGNMENT);
 		this.setBorder(BorderFactory.createLineBorder(new Color(109, 142, 180), 1, true));
-		
+
 		criarPlano();
-		
+
 	}
 
 	public void criarPlano() {
-		for(int i=0; i<p.listaCélulas.size(); i++) {
+		for (int i = 0; i < p.listaCélulas.size(); i++) {
 			this.add(p.listaCélulas.get(i).label);
 		}
 	}
-	
-	public Plano getPlano(){
+
+	public Plano getPlano() {
 		return p;
 	}
-	public List<Célula> getListaCélulas() {
-        return p.listaCélulas;
-    }
 
-	
+	public List<Célula> getListaCélulas() {
+		return p.listaCélulas;
+	}
+
 }

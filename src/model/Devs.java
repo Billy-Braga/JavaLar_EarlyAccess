@@ -30,9 +30,7 @@ public class Devs {
 		célula.devs = this;
 		célula.icon = this.imagem;
 		célula.label.setIcon(célula.icon);
-		this.posicaoX = célula.posiçãoX;
 
-		this.posicaoY = célula.posiçãoY;
 	}
 
 	public int getPosicaoX() {
