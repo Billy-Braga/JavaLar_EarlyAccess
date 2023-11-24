@@ -36,7 +36,7 @@ class Csharp extends Planeta {
 					direcao = 0;
 				}
 			}
-			if (passouPelaCoordenada(8, 13)) {
+			if (passouPelaCoordenada(8, 3)) {
 				aumentarAnoPorRodada();
 				aumentarAnosTotais();
 			}

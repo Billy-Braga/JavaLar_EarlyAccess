@@ -43,9 +43,9 @@ public abstract class Planeta {
 		devsColididos = 0;
 	}
 
-	public static List<Planeta> criarPlanetas(Plano plano) {
+	public static List<Planeta> criarPlanetas() {
 		List<Planeta> planetas = new ArrayList<>();
-		planetas.add(new Java("Java", 8, 8, 0, 0,"/icons/java.png"));
+		planetas.add(new Java("Java", 8, 8, 1, 0,"/icons/java.png"));
 		planetas.add(new Python("Python", 8, 7, 4, 24,"/icons/python.png"));
 		planetas.add(new JavaScript("JavaScript", 8, 6, 3, 10,"/icons/javascript.png"));
 		planetas.add(new RubyonRails("RubyOnRails", 8, 5, 2, 48,"/icons/ruby.png"));

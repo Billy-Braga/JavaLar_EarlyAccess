@@ -15,6 +15,7 @@ public class Plano {
 	public List<Planeta> planetas = new ArrayList<>();
 	public ArrayList<Bugs> listaBugs = new ArrayList<>();
 	public ArrayList<Devs> listaDevs = new ArrayList<>();
+	public ArrayList<Planeta> falecidos= new ArrayList<>();
 
 	public Plano() {
 
@@ -32,9 +33,11 @@ public class Plano {
 				listaCélulas.add(celula);
 			}
 		}
-		planetas = Planeta.criarPlanetas(this);
+		planetas= Planeta.criarPlanetas();
 		atualizarPlano(planetas, listaCélulas);
 	}
+	
+	
 
 	public void atualizarPlano(List<Planeta> planetas, List<Célula> listaCélulas) {
 		for (Célula célula : listaCélulas) {
@@ -66,11 +69,11 @@ public class Plano {
 		}
 	}
 
-	public void verificarColisãoBugs(ArrayList<Bugs> bugsRemovidos) {
+	public void verificarColisãoBugs(List <Planeta> planetas, ArrayList<Bugs> bugsRemovidos) {
 		for (Planeta planeta : planetas) {
 			for (Bugs bug : listaBugs) {
 				if (planeta.getX() == bug.getPosicaoX() && planeta.getY() == bug.getPosicaoY()) {
-					planeta.aumentarMovimento();
+					planeta.diminuirMovimento();
 					planeta.aumentarBugs();
 					System.out.println("O planeta " + planeta.getNome() + " colidiu com um bug na posição " + "("
 							+ planeta.getX() + "," + planeta.getY() + ")");
@@ -84,12 +87,12 @@ public class Plano {
 		}
 	}
 
-	public void verificarColisãoDevs(ArrayList<Devs> devsRemovidos) {
+	public void verificarColisãoDevs(List <Planeta> planetas,ArrayList<Devs> devsRemovidos) {
 		for (Planeta planeta : planetas) {
 			for (Devs dev : listaDevs) {
 				if (planeta.getX() == dev.getPosicaoX() && planeta.getY() == dev.getPosicaoY()) {
 					planeta.aumentarMovimento();
-					planeta.aumentarBugs();
+					planeta.aumentarDevs();
 					System.out.println("O planeta " + planeta.getNome() + " colidiu com um dev na posição " + "("
 							+ planeta.getX() + "," + planeta.getY() + ")");
 					devsRemovidos.add(dev);

@@ -37,10 +37,10 @@ public class Python extends Planeta {
 	        }
 	    }
 
-//		if (passouPelaCoordenada(8, 9)) {
-//			aumentarAnoPorRodada();
-//			aumentarAnosTotais();
-//		}
+		if (passouPelaCoordenada(8, 7)) {
+			aumentarAnoPorRodada();
+			aumentarAnosTotais();
+		}
 	}
 
 	@Override

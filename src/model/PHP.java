@@ -36,7 +36,7 @@ class PHP extends Planeta {
 					direcao = 0;
 				}
 			}
-			if (passouPelaCoordenada(8, 12)) {
+			if (passouPelaCoordenada(8, 4)) {
 				aumentarAnoPorRodada();
 				aumentarAnosTotais();
 			}

@@ -12,10 +12,10 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Bugs;
 import model.Devs;
@@ -26,7 +26,8 @@ public class PainelBotões extends JPanel implements ActionListener {
 
 	private BotõesJavaLar botãoInstante, botãoLerArquivo, botãoRelatório, botãoLerDados, botãoGravar;
 	private List<Planeta> planetas;
-	private List<Bugs> listaBugs = new ArrayList<>();
+	private List<Planeta> falecidos;
+	private ArrayList<Bugs> listaBugs = new ArrayList<>();
 	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
 	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
 	private PainelJavaLar painelJavaLar;
@@ -36,7 +37,7 @@ public class PainelBotões extends JPanel implements ActionListener {
 
 	public PainelBotões(List<Planeta> planetas, PainelJavaLar painelJavaLar) {
 
-		this.plano = plano;
+		this.plano = new Plano();
 		this.painelJavaLar = painelJavaLar;
 		this.planetas = planetas;
 
@@ -74,6 +75,9 @@ public class PainelBotões extends JPanel implements ActionListener {
 		this.setVisible(true);
 		botãoInstante.addActionListener(this);
 		botãoLerArquivo.addActionListener(this);
+		botãoRelatório.addActionListener(this);
+		botãoLerDados.addActionListener(this);
+		botãoGravar.addActionListener(this);
 
 	}
 
@@ -87,13 +91,15 @@ public class PainelBotões extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 List<Bugs> bugsRemovidos = new ArrayList<>();
-		 List<Devs> devsRemovidos = new ArrayList<>();
+		 ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
+		 ArrayList<Devs> devsRemovidos = new ArrayList<>();
+		 List<Planeta> falecidos= new ArrayList<>();
 		 
 		if (e.getSource() == botãoInstante) {
 			for (Planeta planeta : planetas) {
 				int movimento = planeta.getMovimento();
 				planeta.mover(movimento);
+				System.out.println("A posição do planeta " +planeta.getNome()+" é " + planeta.getX()+ "," + planeta.getY());
 			}
 
 			for (int i = 0; i < 3; i++) {
@@ -109,22 +115,38 @@ public class PainelBotões extends JPanel implements ActionListener {
 
 			}
 			painelJavaLar.getPlano().atualizarPlano(planetas, painelJavaLar.getListaCélulas());
-			painelJavaLar.getPlano().verificarColisãoBugs((ArrayList<Bugs>) bugsRemovidos);
-			painelJavaLar.getPlano().verificarColisãoDevs((ArrayList<Devs>) devsRemovidos);
+			painelJavaLar.getPlano().verificarColisãoBugs((List<Planeta>) planetas,(ArrayList<Bugs>) bugsRemovidos);
+			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas,(ArrayList<Devs>) devsRemovidos);
+			painelJavaLar.getPlano().explodirPlanetas((ArrayList<Planeta>) falecidos);
 			
 			revalidate();
 			repaint();
 
 		}
 		if (e.getSource() == botãoLerArquivo) {
-			Object[] opções = { "10", "50", "100", "500", "1000", "1500", "2000" };
-			ImageIcon FischerJonatas = new ImageIcon(
-					"C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\fesch.png");
-			JOptionPane.showOptionDialog(null, instantes,
-					"                                           Selecionar Instantes", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.INFORMATION_MESSAGE, FischerJonatas, opções, opções[0]);
+			 JFileChooser fileChooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto", "txt");
+			    fileChooser.setFileFilter(filter);
+
+			    int result = fileChooser.showOpenDialog(null);
+
+			    if (result == JFileChooser.APPROVE_OPTION) {
+			        java.io.File selectedFile = fileChooser.getSelectedFile();
+			        System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+			    } else if (result == JFileChooser.CANCEL_OPTION) {
+			        System.out.println("Operação cancelada pelo usuário");
+			    }
+			}
+		
+		if (e.getSource() == botãoRelatório) {
+			
+		}
+		if (e.getSource() == botãoLerDados) {
 
 		}
-
+		
+		if (e.getSource() == botãoGravar) {
+			
+		}
 	};
 }

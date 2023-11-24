@@ -37,7 +37,7 @@ public class JavaScript extends Planeta {
 					direcao = 0;
 				}
 			}
-			if (passouPelaCoordenada(8, 10)) {
+			if (passouPelaCoordenada(8, 6)) {
 				aumentarAnoPorRodada();
 				aumentarAnosTotais();
 			}

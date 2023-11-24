@@ -34,7 +34,7 @@ public class JanelaJavaLar extends JFrame {
 	public JanelaJavaLar() {
 		
 		Plano plano = new Plano();
-		List<Planeta> planetas = Planeta.criarPlanetas(plano);
+		List<Planeta> planetas = Planeta.criarPlanetas();
 		
 		this.painelJavaLar = new PainelJavaLar(plano);
 		this.painelFundo = new PainelFundo(painelJavaLar);

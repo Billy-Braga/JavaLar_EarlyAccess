@@ -36,7 +36,7 @@ class RubyonRails extends Planeta {
 					direcao = 0;
 				}
 			}
-			if (passouPelaCoordenada(8, 11)) {
+			if (passouPelaCoordenada(8, 5)) {
 				aumentarAnoPorRodada();
 				aumentarAnosTotais();
 			}

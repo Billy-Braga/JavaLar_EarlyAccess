@@ -36,7 +36,7 @@ class C extends Planeta {
 					direcao = 0;
 				}
 			}
-			if (passouPelaCoordenada(8, 15)) {
+			if (passouPelaCoordenada(8, 1)) {
 				aumentarAnoPorRodada();
 				aumentarAnosTotais();
 			}
