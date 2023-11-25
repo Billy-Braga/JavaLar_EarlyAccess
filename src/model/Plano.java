@@ -16,6 +16,11 @@ public class Plano {
 	public ArrayList<Bugs> listaBugs = new ArrayList<>();
 	public ArrayList<Devs> listaDevs = new ArrayList<>();
 	public ArrayList<Planeta> falecidos= new ArrayList<>();
+	public int[] quadranteBug= new int[4];
+	public int[] quadranteDev= new int [4];
+	public String nome = "Enzo";
+	public int matricula = 540602;
+
 
 	public Plano() {
 
@@ -120,9 +125,67 @@ public class Plano {
 	
 	public void analisarQuadrantes() {
 		for(Bugs bug : listaBugs) {
-			if(bug.posicaoX>9) {
-				
+			if(bug.getPosicaoX()  > 8 && bug.getPosicaoY() < 8) {
+				quadranteBug[0]++;
 			}
+			if(bug.getPosicaoX()  < 8 && bug.getPosicaoY() < 8) {
+				quadranteBug[1]++;
+			}
+			if(bug.getPosicaoX()  < 8 && bug.getPosicaoY() > 8) {
+				quadranteBug[2]++;
+			}
+			if(bug.getPosicaoX()  >8 && bug.getPosicaoY() > 8) {
+				quadranteBug[3]++;
+			}
+			
 		}
+		for(Devs dev : listaDevs) {
+			if(dev.getPosicaoX() > 8 && dev.getPosicaoY() < 8) {
+				quadranteDev[0]++;
+			}
+			if(dev.getPosicaoX()  < 8 && dev.getPosicaoY() < 8) {
+				quadranteDev[1]++;
+			}
+			if(dev.getPosicaoX()  < 8 && dev.getPosicaoY() > 8) {
+				quadranteDev[2]++;
+			}
+			if(dev.getPosicaoX()  >8 && dev.getPosicaoY() > 8) {
+				quadranteDev[3]++;
+			}
+			
+		}
+	}
+
+	public int getQuadranteBug1() {
+		return quadranteBug[0];
+	}
+	public int getQuadranteBug2() {
+		return quadranteBug[1];
+	}
+	public int getQuadranteBug3() {
+		return quadranteBug[2];
+	}
+	public int getQuadranteBug4() {
+		return quadranteBug[3];
+	}
+	public int getQuadranteDev1() {
+		return quadranteDev[0];
+	}
+	public int getQuadranteDev2() {
+		return quadranteDev[1];
+	}
+	public int getQuadranteDev3() {
+		return quadranteDev[2];
+	}
+	public int getQuadranteDev4() {
+		return quadranteDev[3];
+	}
+	
+	public String getNome(){
+		return nome;
+	}
+	
+	public int getMatricula() {
+		return matricula;
 	}
 }

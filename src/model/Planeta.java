@@ -131,6 +131,12 @@ public abstract class Planeta {
 	public double getTempoDesdeUltimoInstante() {
 		return tempoDesdeUltimoInstante;
 	}
+	
+	
+
+	public void setTempoDesdeUltimoInstante(double tempoDesdeUltimoInstante) {
+		this.tempoDesdeUltimoInstante = tempoDesdeUltimoInstante;
+	}
 
 	public void zerarTempoDesdeUltimoInstante() {
 		this.tempoDesdeUltimoInstante = 0;

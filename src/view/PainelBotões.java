@@ -102,18 +102,18 @@ public class PainelBotões extends JPanel implements ActionListener {
 			for (Planeta planeta : planetas) {
 
 				planeta.mover();
+				planeta.rotacionar();
 				System.out.println("A posição do planeta " +planeta.getNome()+" é " + planeta.getX()+ "," + planeta.getY());
+				System.out.println("No planeta" +planeta.getNome()+ " passou-se " + planeta.getTempoRodado() + " horas");
 			}
 
 			for (int i = 0; i < 3; i++) {
 				Bugs novoBug = new Bugs(painelJavaLar.getPlano());
-			    System.out.println("Novo Bug criado: " + novoBug.getPosicaoX() + ", " + novoBug.getPosicaoY());
 			    painelJavaLar.getPlano().listaBugs.add(novoBug);
 
 			}
 			for (int i = 0; i < 3; i++) {
 			    Devs novoDev = new Devs(painelJavaLar.getPlano());
-			    System.out.println("Novo Dev criado: " + novoDev.getPosicaoX() + ", " + novoDev.getPosicaoY());
 			    painelJavaLar.getPlano().listaDevs.add(novoDev);
 
 			}
@@ -121,6 +121,8 @@ public class PainelBotões extends JPanel implements ActionListener {
 			painelJavaLar.getPlano().verificarColisãoBugs((List<Planeta>) planetas,(ArrayList<Bugs>) bugsRemovidos);
 			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas,(ArrayList<Devs>) devsRemovidos);
 			painelJavaLar.getPlano().explodirPlanetas((List<Planeta>) planetas,(ArrayList<Planeta>) falecidos);
+			painelJavaLar.getPlano().analisarQuadrantes();
+			
 			
 			revalidate();
 			repaint();
@@ -147,7 +149,7 @@ public class PainelBotões extends JPanel implements ActionListener {
 		                for (int i = 1; i < componentes.length; i++) {
 	                        int instantes = Integer.parseInt(componentes[i]);
 	                        System.out.println(instantes);
-	                        if (!planetas.get(indexPlaneta).getNome().equals("Java")) {
+	                        if (planetas.get(indexPlaneta).getNome().equals("Java")==false) {
 	                            Planeta planeta = planetas.get(indexPlaneta);
 	                            planeta.setInstantes(instantes);
 	                            System.out.println(planeta);

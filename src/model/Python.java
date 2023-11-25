@@ -49,7 +49,7 @@ public class Python extends Planeta {
 
 	@Override
 	public void rotacionar() {
-		double tempoDesdeUltimoInstante = rotação;
+		double tempoDesdeUltimoInstante = rotação * getInstantes();
 		this.tempoDesdeUltimoInstante = tempoDesdeUltimoInstante;
 		tempoRodado += tempoDesdeUltimoInstante;
 	}
