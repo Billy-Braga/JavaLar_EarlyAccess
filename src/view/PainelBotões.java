@@ -5,8 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -27,6 +29,7 @@ public class PainelBotões extends JPanel implements ActionListener {
 	private BotõesJavaLar botãoInstante, botãoLerArquivo, botãoRelatório, botãoLerDados, botãoGravar;
 	private List<Planeta> planetas;
 	private List<Planeta> falecidos;
+	private int indexPlaneta = 0;
 	private ArrayList<Bugs> listaBugs = new ArrayList<>();
 	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
 	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
@@ -97,8 +100,8 @@ public class PainelBotões extends JPanel implements ActionListener {
 		 
 		if (e.getSource() == botãoInstante) {
 			for (Planeta planeta : planetas) {
-				int movimento = planeta.getMovimento();
-				planeta.mover(movimento);
+
+				planeta.mover();
 				System.out.println("A posição do planeta " +planeta.getNome()+" é " + planeta.getX()+ "," + planeta.getY());
 			}
 
@@ -117,26 +120,52 @@ public class PainelBotões extends JPanel implements ActionListener {
 			painelJavaLar.getPlano().atualizarPlano(planetas, painelJavaLar.getListaCélulas());
 			painelJavaLar.getPlano().verificarColisãoBugs((List<Planeta>) planetas,(ArrayList<Bugs>) bugsRemovidos);
 			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas,(ArrayList<Devs>) devsRemovidos);
-			painelJavaLar.getPlano().explodirPlanetas((ArrayList<Planeta>) falecidos);
+			painelJavaLar.getPlano().explodirPlanetas((List<Planeta>) planetas,(ArrayList<Planeta>) falecidos);
 			
 			revalidate();
 			repaint();
 
 		}
 		if (e.getSource() == botãoLerArquivo) {
-			 JFileChooser fileChooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Texto", "txt");
-			    fileChooser.setFileFilter(filter);
+		    JFileChooser fileChooser = new JFileChooser();
+		  
 
-			    int result = fileChooser.showOpenDialog(null);
+		    int result = fileChooser.showOpenDialog(null);
 
-			    if (result == JFileChooser.APPROVE_OPTION) {
-			        java.io.File selectedFile = fileChooser.getSelectedFile();
-			        System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
-			    } else if (result == JFileChooser.CANCEL_OPTION) {
-			        System.out.println("Operação cancelada pelo usuário");
-			    }
-			}
+		    if (result == JFileChooser.APPROVE_OPTION) {
+		        java.io.File selectedFile = fileChooser.getSelectedFile();
+		        System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+
+		        try (Scanner scanner = new Scanner(selectedFile)) {
+		            if (scanner.hasNextLine()) {
+		                scanner.nextLine();
+		            }
+
+		            while (scanner.hasNextLine()) {
+		                String linha = scanner.nextLine();
+		                String[] componentes = linha.split(",");
+		                for (int i = 1; i < componentes.length; i++) {
+	                        int instantes = Integer.parseInt(componentes[i]);
+	                        System.out.println(instantes);
+	                        if (!planetas.get(indexPlaneta).getNome().equals("Java")) {
+	                            Planeta planeta = planetas.get(indexPlaneta);
+	                            planeta.setInstantes(instantes);
+	                            System.out.println(planeta);
+	                        }
+	                 
+	                        indexPlaneta = (indexPlaneta + 1) % planetas.size();
+	                    }
+
+		                
+		                int quantatidadeBugs = Integer.parseInt(componentes[componentes.length - 2]);
+	                    int quantidadeDevs = Integer.parseInt(componentes[componentes.length - 1]);
+		            }
+		            
+		        } catch (IOException | NumberFormatException ex) {
+		            ex.printStackTrace();
+		        }
+		    } 
+		}
 		
 		if (e.getSource() == botãoRelatório) {
 			

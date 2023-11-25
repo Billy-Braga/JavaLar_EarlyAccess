@@ -8,13 +8,16 @@ class RubyonRails extends Planeta {
 	public RubyonRails(String nome, int x, int y, int movimento, double rotação,  String caminhoImagem) {
 		super("RubyOnRails", 8, 5, 2, 48,caminhoImagem);
 		direcao = 0;
+		anoJavaLar = 0;
 
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
+		
+		int unidades = getInstantes() * getMovimento();
 
-		for (int i = 0; i < movimento; i++) {
+		for (int i = 0; i < unidades; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 5 && y == 5) {

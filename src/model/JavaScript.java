@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 public class JavaScript extends Planeta {
 	private int direcao;
 
+
 	public JavaScript(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
 		super("JavaScript", 8, 6, 3, 10, caminhoImagem);
 		direcao = 0;
@@ -13,9 +14,11 @@ public class JavaScript extends Planeta {
 	}
 
 	@Override
-	public void mover(int movimento) {
-
-		for (int i = 0; i < movimento; i++) {
+	public void mover() {
+		
+		int unidades = getInstantes() * movimento;
+		
+		for (int i = 0; i < unidades; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 6 && y == 6) {
@@ -43,6 +46,7 @@ public class JavaScript extends Planeta {
 			}
 		}
 	}
+
 
 	@Override
 	public void rotacionar() {

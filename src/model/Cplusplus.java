@@ -8,13 +8,16 @@ class Cplusplus extends Planeta {
 	public Cplusplus(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
 		super("Cplusplus", 8, 2, 2, 0.5,caminhoImagem);
 		direcao = 0;
+		anoJavaLar = 0;
 
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
+		
+		int unidades = getInstantes() * getMovimento();
 
-		for (int i = 0; i <movimento; i++) {
+		for (int i = 0; i <unidades; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 2 && y == 2) {

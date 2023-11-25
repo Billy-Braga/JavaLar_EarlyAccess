@@ -21,6 +21,7 @@ public abstract class Planeta {
 	protected int totalInstantes;
 	private int bugsColididos;
 	private int devsColididos;
+	protected int instantes;
 	private ImageIcon imageIcon;
 	private PainelJavaLar painelJavaLar;
 	private Plano plano;
@@ -37,12 +38,13 @@ public abstract class Planeta {
 		this.anoJavaLar = 0;
 		this.anoPorRodada = 0;
 		this.tempoRodado = 0;
+		this.instantes= 0;
 		this.painelJavaLar = painelJavaLar;
 		this.plano=plano;
 		bugsColididos = 0;
 		devsColididos = 0;
 	}
-
+	
 	public static List<Planeta> criarPlanetas() {
 		List<Planeta> planetas = new ArrayList<>();
 		planetas.add(new Java("Java", 8, 8, 1, 0,"/icons/java.png"));
@@ -84,6 +86,14 @@ public abstract class Planeta {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public int getInstantes() {
+		return instantes;
+	}
+
+	public void setInstantes(int instantes) {
+		this.instantes = instantes;
 	}
 
 	public void zerarAnoPorRodada() {
@@ -172,7 +182,7 @@ public abstract class Planeta {
 	}
 	
 
-	public abstract void mover(int movimento);
+	public abstract void mover();
 		
 	public abstract void rotacionar();
 

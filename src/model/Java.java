@@ -9,7 +9,7 @@ public class Java extends Planeta{
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
 	}
 
 	@Override

@@ -8,13 +8,17 @@ class PHP extends Planeta {
 	public PHP(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
 		super("PHP", 8, 4, 2, 60,caminhoImagem);
 		direcao = 0;
+		anoJavaLar=0;
 
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
 		
-		for (int i = 0; i < movimento; i++) {
+		int unidades = getInstantes() * getMovimento();
+		
+		
+		for (int i = 0; i < unidades; i++) {
 			if (direcao == 0) {
 				this.x--;
 				if (x == 4 && y == 4) {

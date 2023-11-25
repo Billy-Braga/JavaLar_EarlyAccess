@@ -8,13 +8,16 @@ class C extends Planeta {
 	public C(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
 		super("C", 8, 1, 10, 0.1, caminhoImagem);
 		direcao = 0;
+		anoJavaLar = 0;
 
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
+		
+		int unidades = getInstantes() * getMovimento();
 
-		for (int i = 0; i < movimento; i++) {
+		for (int i = 0; i < unidades; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 1 && y == 1) {

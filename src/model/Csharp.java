@@ -8,13 +8,16 @@ class Csharp extends Planeta {
 	public Csharp(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
 		super("Csharp", 8, 3, 1, 4, caminhoImagem);
 		direcao = 0;
+		anoJavaLar = 0;
 
 	}
 
 	@Override
-	public void mover(int movimento) {
+	public void mover() {
+		
+		int unidades = getInstantes() * getMovimento();
 
-		for (int i = 0; i < movimento; i++) {
+		for (int i = 0; i < unidades; i++) {
 			if (direcao == 0) {
 				x--;
 				if (x == 3 && y == 3) {

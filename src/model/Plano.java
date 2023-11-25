@@ -3,11 +3,11 @@ package model;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 public class Plano {
@@ -106,13 +106,23 @@ public class Plano {
 		}
 	}
 
-	public void explodirPlanetas(ArrayList<Planeta> falecidos) {
+	public void explodirPlanetas(List <Planeta> planetas, ArrayList<Planeta> falecidos) {
 		for (Planeta planeta : planetas) {
-			if (planeta.getMovimento() == 0) {
-				System.out.println("O planeta :" + planeta.getNome() + "explodiu!");
-
+			if (planeta.getMovimento() == 0 && !falecidos.contains(planeta)) {
+				JLabel falecimento = new JLabel ("O Planeta " + planeta.getNome() + "Explodiu!");
+				falecimento.setForeground(Color.WHITE);
+				JOptionPane.showMessageDialog(null, falecimento, "Explosão 💀", JOptionPane.ERROR_MESSAGE);
+				falecidos.add(planeta);
 			}
 		}
 		planetas.removeAll(falecidos);
+	}
+	
+	public void analisarQuadrantes() {
+		for(Bugs bug : listaBugs) {
+			if(bug.posicaoX>9) {
+				
+			}
+		}
 	}
 }
