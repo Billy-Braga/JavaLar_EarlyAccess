@@ -10,12 +10,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
+import view.PainelJavaLar;
+
 public class Plano {
 	public ArrayList<Célula> listaCélulas;
 	public List<Planeta> planetas = new ArrayList<>();
 	public ArrayList<Bugs> listaBugs = new ArrayList<>();
 	public ArrayList<Devs> listaDevs = new ArrayList<>();
 	public ArrayList<Planeta> falecidos= new ArrayList<>();
+	public LerArquivo lerArquivo = new LerArquivo();
+	private ArrayList<int[]> valoresConvertidos = new ArrayList<>();
+	private PainelJavaLar painelJavaLar;
+	private int instanteAtual=0;
 	public int[] quadranteBug= new int[4];
 	public int[] quadranteDev= new int [4];
 	public String nome = "Enzo";
@@ -188,4 +194,24 @@ public class Plano {
 	public int getMatricula() {
 		return matricula;
 	}
+	
+	public void processarInstantes() {
+		ArrayList<String[]> valores = lerArquivo.formatarArquivo();
+		for(String[] valor : valores) {
+			int[] instantesConvertidos = new int[9];
+			for(int i =1; i< instantesConvertidos.length; i++) {
+				instantesConvertidos[i-1]= Integer.parseInt(valor[i]);
+			}
+			valoresConvertidos.add(instantesConvertidos);
+		}
+	}
+	
+//	public void moverPlanetas() {
+//		int [] instantes = valoresConvertidos.get(instanteAtual);
+//		for(int i = 0; i< planetas.size(); i++) {
+//			planetas.get(i).mover(instantes[i]);
+//			System.out.println(planetas.get(i).getNome() + "" + instantes[i]);
+//		}
+//		
+//	}
 }

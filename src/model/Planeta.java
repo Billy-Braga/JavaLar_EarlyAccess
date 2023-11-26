@@ -182,9 +182,7 @@ public abstract class Planeta {
 	}
 
 	public void aumentarAnosTotais() {
-
 		this.anoJavaLar++;
-
 	}
 	
 

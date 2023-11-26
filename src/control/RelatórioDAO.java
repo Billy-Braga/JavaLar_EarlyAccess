@@ -7,13 +7,17 @@ import java.util.List;
 
 import model.Planeta;
 import model.Plano;
+import view.PainelJavaLar;
 
 public class RelatórioDAO {
 
 	private Conexão conexão;
+	private PainelJavaLar painelJavaLar;
 
-	public RelatórioDAO(Plano plano, List<Planeta> planetas) {
-	
+	public RelatórioDAO(Plano plano, List<Planeta> planetas, PainelJavaLar painelJavaLar) {
+		this.painelJavaLar=painelJavaLar;
+	}
+		public void inserirDados(Plano plano, List<Planeta> planetas) {
 			try {
 				Connection conexao = new Conexão().getConexao();
 
@@ -29,9 +33,9 @@ public class RelatórioDAO {
 				
 				
 				
-				insert.setString(1, plano.getNome());
-				insert.setString(2, plano.getMatricula() + "");
-				insert.setString(3, null);
+				insert.setString(1, painelJavaLar.getPlano().getNome());
+				insert.setString(2, painelJavaLar.getPlano().getMatricula() + "");
+				insert.setString(3, "AE_10.csv");
 				int i=4;
 				
 				for(Planeta planeta : planetas) {
@@ -64,16 +68,14 @@ public class RelatórioDAO {
 						i++;
 					}
 				}
-				insert.setInt(39, plano.getQuadranteBug1());
-				insert.setInt(40, plano.getQuadranteBug2());
-				insert.setInt(41, plano.getQuadranteBug3());
-				insert.setInt(42, plano.getQuadranteBug4());
-				insert.setInt(43, plano.getQuadranteDev1());
-				insert.setInt(44, plano.getQuadranteDev2());
-				insert.setInt(45, plano.getQuadranteDev3());
-				insert.setInt(46, plano.getQuadranteDev4());
-				
-				
+				insert.setInt(39, painelJavaLar.getPlano().getQuadranteBug1());
+				insert.setInt(40, painelJavaLar.getPlano().getQuadranteBug2());
+				insert.setInt(41, painelJavaLar.getPlano().getQuadranteBug3());
+				insert.setInt(42, painelJavaLar.getPlano().getQuadranteBug4());
+				insert.setInt(43, painelJavaLar.getPlano().getQuadranteDev1());
+				insert.setInt(44, painelJavaLar.getPlano().getQuadranteDev2());
+				insert.setInt(45, painelJavaLar.getPlano().getQuadranteDev3());
+				insert.setInt(46, painelJavaLar.getPlano().getQuadranteDev4());
 				
 				insert.execute();
 				conexao.close();
@@ -81,6 +83,7 @@ public class RelatórioDAO {
 			} catch (SQLException exception) {
 				exception.printStackTrace();
 			}
+		
 		}
 	}
 

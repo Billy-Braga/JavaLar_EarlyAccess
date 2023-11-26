@@ -17,8 +17,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
+import control.RelatórioDAO;
 import model.Bugs;
 import model.Devs;
 import model.Planeta;
@@ -34,6 +34,10 @@ public class PainelBotões extends JPanel implements ActionListener {
 	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
 	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
 	private PainelJavaLar painelJavaLar;
+	private int quantidadeBugs = 0;
+	private int quantidadeDevs = 0;
+	private RelatórioDAO relatório;
+	private String arquivo;
 	private JLabel instantes;
 	private JLabel título;
 	private Plano plano;
@@ -43,6 +47,7 @@ public class PainelBotões extends JPanel implements ActionListener {
 		this.plano = new Plano();
 		this.painelJavaLar = painelJavaLar;
 		this.planetas = planetas;
+		relatório = new RelatórioDAO(plano, planetas,painelJavaLar);
 
 		ImageIcon navezona = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\talvez.gif");
 
@@ -94,90 +99,96 @@ public class PainelBotões extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
-		 ArrayList<Devs> devsRemovidos = new ArrayList<>();
-		 List<Planeta> falecidos= new ArrayList<>();
-		 
+		ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
+		ArrayList<Devs> devsRemovidos = new ArrayList<>();
+		List<Planeta> falecidos = new ArrayList<>();
+
 		if (e.getSource() == botãoInstante) {
 			for (Planeta planeta : planetas) {
 
 				planeta.mover();
 				planeta.rotacionar();
-				System.out.println("A posição do planeta " +planeta.getNome()+" é " + planeta.getX()+ "," + planeta.getY());
-				System.out.println("No planeta" +planeta.getNome()+ " passou-se " + planeta.getTempoRodado() + " horas");
+				System.out.println(
+						"A posição do planeta " + planeta.getNome() + " é " + planeta.getX() + "," + planeta.getY());
+				System.out.println(
+						"No planeta" + planeta.getNome() + " passou-se " + planeta.getTempoRodado() + " horas");
 			}
 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < quantidadeBugs; i++) {
 				Bugs novoBug = new Bugs(painelJavaLar.getPlano());
-			    painelJavaLar.getPlano().listaBugs.add(novoBug);
+				painelJavaLar.getPlano().listaBugs.add(novoBug);
 
 			}
-			for (int i = 0; i < 3; i++) {
-			    Devs novoDev = new Devs(painelJavaLar.getPlano());
-			    painelJavaLar.getPlano().listaDevs.add(novoDev);
+			for (int i = 0; i < quantidadeDevs; i++) {
+				Devs novoDev = new Devs(painelJavaLar.getPlano());
+				painelJavaLar.getPlano().listaDevs.add(novoDev);
 
 			}
 			painelJavaLar.getPlano().atualizarPlano(planetas, painelJavaLar.getListaCélulas());
-			painelJavaLar.getPlano().verificarColisãoBugs((List<Planeta>) planetas,(ArrayList<Bugs>) bugsRemovidos);
-			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas,(ArrayList<Devs>) devsRemovidos);
-			painelJavaLar.getPlano().explodirPlanetas((List<Planeta>) planetas,(ArrayList<Planeta>) falecidos);
+			painelJavaLar.getPlano().verificarColisãoBugs((List<Planeta>) planetas, (ArrayList<Bugs>) bugsRemovidos);
+			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas, (ArrayList<Devs>) devsRemovidos);
+			painelJavaLar.getPlano().explodirPlanetas((List<Planeta>) planetas, (ArrayList<Planeta>) falecidos);
 			painelJavaLar.getPlano().analisarQuadrantes();
-			
-			
+
 			revalidate();
 			repaint();
 
 		}
 		if (e.getSource() == botãoLerArquivo) {
-		    JFileChooser fileChooser = new JFileChooser();
-		  
+			JFileChooser fileChooser = new JFileChooser();
 
-		    int result = fileChooser.showOpenDialog(null);
+			int result = fileChooser.showOpenDialog(null);
 
-		    if (result == JFileChooser.APPROVE_OPTION) {
-		        java.io.File selectedFile = fileChooser.getSelectedFile();
-		        System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+			if (result == JFileChooser.APPROVE_OPTION) {
+				java.io.File selectedFile = fileChooser.getSelectedFile();
+				System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+				arquivo = selectedFile.getAbsolutePath();
 
-		        try (Scanner scanner = new Scanner(selectedFile)) {
-		            if (scanner.hasNextLine()) {
-		                scanner.nextLine();
-		            }
+				try (Scanner scanner = new Scanner(selectedFile)) {
+					if (scanner.hasNextLine()) {
+						scanner.nextLine();
+					}
 
-		            while (scanner.hasNextLine()) {
-		                String linha = scanner.nextLine();
-		                String[] componentes = linha.split(",");
-		                for (int i = 1; i < componentes.length; i++) {
-	                        int instantes = Integer.parseInt(componentes[i]);
-	                        System.out.println(instantes);
-	                        if (planetas.get(indexPlaneta).getNome().equals("Java")==false) {
-	                            Planeta planeta = planetas.get(indexPlaneta);
-	                            planeta.setInstantes(instantes);
-	                            System.out.println(planeta);
-	                        }
-	                 
-	                        indexPlaneta = (indexPlaneta + 1) % planetas.size();
-	                    }
+					while (scanner.hasNextLine()) {
+						String linha = scanner.nextLine();
+						String[] componentes = linha.split(",");
+						for (int i = 1; i < componentes.length; i++) {
+							int instantes = Integer.parseInt(componentes[i]);
+							System.out.println(instantes);
+							if (planetas.get(indexPlaneta).getNome().equals("Java") == false) {
+								Planeta planeta = planetas.get(indexPlaneta);
+								planeta.setInstantes(instantes);
+								System.out.println(planeta);
+							}
 
-		                
-		                int quantatidadeBugs = Integer.parseInt(componentes[componentes.length - 2]);
-	                    int quantidadeDevs = Integer.parseInt(componentes[componentes.length - 1]);
-		            }
-		            
-		        } catch (IOException | NumberFormatException ex) {
-		            ex.printStackTrace();
-		        }
-		    } 
+							indexPlaneta = (indexPlaneta + 1) % planetas.size();
+						}
+
+						quantidadeBugs = Integer.parseInt(componentes[componentes.length - 2]);
+						quantidadeDevs = Integer.parseInt(componentes[componentes.length - 1]);
+					}
+
+				} catch (IOException | NumberFormatException ex) {
+					ex.printStackTrace();
+				}
+			}
 		}
-		
+
 		if (e.getSource() == botãoRelatório) {
+			relatório.inserirDados(plano, planetas);
 			
 		}
 		if (e.getSource() == botãoLerDados) {
 
 		}
-		
+
 		if (e.getSource() == botãoGravar) {
-			
+
 		}
+
+	}
+
+	public String getArquivo() {
+		return arquivo;
 	};
 }
