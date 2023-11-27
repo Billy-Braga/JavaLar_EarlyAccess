@@ -29,7 +29,7 @@ public class ActionController implements ActionListener {
 	private PainelJavaLar painelJavaLar;
 	private int quantidadeBugs = 0;
 	private int quantidadeDevs = 0;
-	private RelatórioDAO relatório;
+	private JavaLarDAO relatório;
 	private String arquivo;
 
 	public ActionController(List<Planeta> planetas, PainelJavaLar painelJavaLar, PainelBotões painelBotões) {
@@ -37,7 +37,7 @@ public class ActionController implements ActionListener {
 		this.painelBotões = painelBotões;
 		this.planetas = planetas;
 		this.painelJavaLar = painelJavaLar;
-		relatório = new RelatórioDAO(plano, planetas, painelJavaLar, this);
+		relatório = new JavaLarDAO(plano, planetas, painelJavaLar, this);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class ActionController implements ActionListener {
 
 			if (result == JFileChooser.APPROVE_OPTION) {
 				java.io.File selectedFile = fileChooser.getSelectedFile();
-				System.out.println("Arquivo selecionado: " + selectedFile.getName());
+
 				arquivo = selectedFile.getName();
 
 				try (Scanner scanner = new Scanner(selectedFile)) {
@@ -90,11 +90,11 @@ public class ActionController implements ActionListener {
 						String[] componentes = linha.split(",");
 						for (int i = 1; i < componentes.length; i++) {
 							int instantes = Integer.parseInt(componentes[i]);
-							System.out.println(instantes);
+
 							if (planetas.get(indexPlaneta).getNome().equals("Java") == false) {
 								Planeta planeta = planetas.get(indexPlaneta);
 								planeta.setInstantes(instantes);
-								System.out.println(planeta);
+
 							}
 
 							indexPlaneta = (indexPlaneta + 1) % planetas.size();
@@ -112,6 +112,14 @@ public class ActionController implements ActionListener {
 		}
 		if (e.getSource() == painelBotões.getBotãoRelatório()) {
 			relatório.inserirDados(plano, planetas);
+		}
+
+		if (e.getSource() == painelBotões.getBotãoLerDados()) {
+			relatório.analisarDados();
+		}
+
+		if (e.getSource() == painelBotões.getBotãoGravar()) {
+			relatório.gravarSaída();
 		}
 
 	}

@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import control.ActionController;
-import control.RelatórioDAO;
+import control.JavaLarDAO;
 import model.Bugs;
 import model.Devs;
 import model.Planeta;
@@ -37,7 +37,7 @@ public class PainelBotões extends JPanel {
 	private PainelJavaLar painelJavaLar;
 	private int quantidadeBugs = 0;
 	private int quantidadeDevs = 0;
-	private RelatórioDAO relatório;
+	private JavaLarDAO relatório;
 	private String arquivo;
 	private JLabel instantes;
 	private JLabel título;
@@ -46,7 +46,7 @@ public class PainelBotões extends JPanel {
 
 	public PainelBotões(List<Planeta> planetas, PainelJavaLar painelJavaLar) {
 
-		controle= new ActionController(planetas, painelJavaLar, this);
+		controle = new ActionController(planetas, painelJavaLar, this);
 
 		ImageIcon navezona = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\talvez.gif");
 
@@ -88,7 +88,7 @@ public class PainelBotões extends JPanel {
 	public BotõesJavaLar getBotãoLerArquivo() {
 		return botãoLerArquivo;
 	}
-	
+
 	public BotõesJavaLar getBotãoRelatório() {
 		return botãoRelatório;
 	}
@@ -100,5 +100,5 @@ public class PainelBotões extends JPanel {
 	public BotõesJavaLar getBotãoGravar() {
 		return botãoGravar;
 	}
-	
+
 }

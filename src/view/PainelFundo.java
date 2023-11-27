@@ -10,15 +10,13 @@ import javax.swing.OverlayLayout;
 
 import model.Plano;
 
-
-
 public class PainelFundo extends JPanel {
 
 	private PainelJavaLar painelJavaLar;
 
 	public PainelFundo(PainelJavaLar painelJavaLar) {
-		this.painelJavaLar= painelJavaLar;
-		
+		this.painelJavaLar = painelJavaLar;
+
 		ImageIcon imagem = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\bomdia.gif");
 		JLabel imagemLucas = new JLabel(imagem);
 		imagemLucas.setAlignmentX(CENTER_ALIGNMENT);

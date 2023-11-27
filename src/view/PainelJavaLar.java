@@ -22,7 +22,7 @@ public class PainelJavaLar extends JPanel {
 
 	public PainelJavaLar(Plano plano) {
 
-		this.p=plano;
+		this.p = plano;
 		this.setLayout(new GridLayout(15, 15));
 		this.setBackground(new Color(29, 33, 36));
 		this.setPreferredSize(new Dimension(675, 675));

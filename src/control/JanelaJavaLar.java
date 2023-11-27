@@ -32,14 +32,14 @@ public class JanelaJavaLar extends JFrame {
 	private PainelJavaLar painelJavaLar;
 
 	public JanelaJavaLar() {
-		
+
 		Plano plano = new Plano();
 		List<Planeta> planetas = Planeta.criarPlanetas();
-		
+
 		this.painelJavaLar = new PainelJavaLar(plano);
 		this.painelFundo = new PainelFundo(painelJavaLar);
-		this.painelBotões = new PainelBotões(planetas,painelJavaLar);
-		
+		this.painelBotões = new PainelBotões(planetas, painelJavaLar);
+
 		this.setTitle("O Grandioso Sistema JavaLar");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());

@@ -10,10 +10,10 @@ public class Conexão {
 
 	public Conexão() {
 
-		this.host = "da_java.mysql.dbaas.com.br";//"127.0.0.1"; // localhost
-		this.banco = "da_java";//"teste_bd";
-		this.usuario = "da_java";//"root";
-		this.senha = "Tecnicas*2023@";//"";
+		this.host = "da_java.mysql.dbaas.com.br";
+		this.banco = "da_java";
+		this.usuario = "da_java";
+		this.senha = "Tecnicas*2023@";
 	}
 
 	public Connection getConexao() {

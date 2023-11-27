@@ -84,15 +84,10 @@ public class Plano {
 				if (planeta.getX() == bug.getPosicaoX() && planeta.getY() == bug.getPosicaoY()) {
 					planeta.diminuirMovimento();
 					planeta.aumentarBugs();
-					System.out.println("O planeta " + planeta.getNome() + " colidiu com um bug na posição " + "("
-							+ planeta.getX() + "," + planeta.getY() + ")");
 					bugsRemovidos.add(bug);
 				}
 			}
 			listaBugs.removeAll(bugsRemovidos);
-		}
-		for (Bugs bugRemovido : bugsRemovidos) {
-			System.out.println("Bug removido: " + bugRemovido.getPosicaoX() + ", " + bugRemovido.getPosicaoY());
 		}
 	}
 
@@ -102,16 +97,10 @@ public class Plano {
 				if (planeta.getX() == dev.getPosicaoX() && planeta.getY() == dev.getPosicaoY()) {
 					planeta.aumentarMovimento();
 					planeta.aumentarDevs();
-					System.out.println("O planeta " + planeta.getNome() + " colidiu com um dev na posição " + "("
-							+ planeta.getX() + "," + planeta.getY() + ")");
 					devsRemovidos.add(dev);
 				}
 			}
 			listaDevs.removeAll(devsRemovidos);
-		}
-
-		for (Devs devRemovido : devsRemovidos) {
-			System.out.println("Dev removido: " + devRemovido.getPosicaoX() + ", " + devRemovido.getPosicaoY());
 		}
 	}
 
