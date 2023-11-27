@@ -7,83 +7,98 @@ import java.util.List;
 
 import model.Planeta;
 import model.Plano;
+import view.PainelBotões;
 import view.PainelJavaLar;
 
 public class RelatórioDAO {
 
 	private Conexão conexão;
 	private PainelJavaLar painelJavaLar;
+	private PainelBotões painelBotões;
+	private ActionController actionController;
 
-	public RelatórioDAO(Plano plano, List<Planeta> planetas, PainelJavaLar painelJavaLar) {
-		this.painelJavaLar=painelJavaLar;
+	public RelatórioDAO(Plano plano, List<Planeta> planetas, PainelJavaLar painelJavaLar,
+			ActionController actionController) {
+		this.painelJavaLar = painelJavaLar;
+		this.painelBotões = painelBotões;
+		this.actionController = actionController;
 	}
-		public void inserirDados(Plano plano, List<Planeta> planetas) {
-			try {
-				Connection conexao = new Conexão().getConexao();
 
-				PreparedStatement insert = conexao
-						.prepareStatement("INSERT INTO javalar (nome, matricula, nome_arquivo, "
-								+ "bug_python, bug_javascript, bug_ruby, bug_php, bug_csharp, bug_cmais, bug_c, "
-								+ "dev_python, dev_javascript, dev_ruby, dev_php, dev_csharp, dev_cmais, dev_c, "
-								+ "v_python, v_javascript, v_ruby, v_php, v_csharp, v_cmais, v_c, "
-								+ "d_python, d_javascript, d_ruby, d_php, d_csharp, d_cmais, d_c, "
-								+ "a_python, a_javascript, a_ruby, a_php, a_csharp, a_cmais, a_c, "
-								+ "bug_q1, bug_q2, bug_q3, bug_q4, "
-								+ "dev_q1, dev_q2, dev_q3, dev_q4) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-				
-				
-				
-				insert.setString(1, painelJavaLar.getPlano().getNome());
-				insert.setString(2, painelJavaLar.getPlano().getMatricula() + "");
-				insert.setString(3, "AE_10.csv");
-				int i=4;
-				
-				for(Planeta planeta : planetas) {
-					if(planeta.getNome().equals("Java")==false) {
-						insert.setInt(i, planeta.getBugsColididos());
-						i++;
-					}
+	public void inserirDados(Plano plano, List<Planeta> planetas) {
+		try {
+			Connection conexao = new Conexão().getConexao();
+
+			PreparedStatement insert = conexao.prepareStatement("INSERT INTO javalar (nome, matricula, nome_arquivo, "
+					+ "bug_python, bug_javascript, bug_ruby, bug_php, bug_csharp, bug_cmais, bug_c, "
+					+ "dev_python, dev_javascript, dev_ruby, dev_php, dev_csharp, dev_cmais, dev_c, "
+					+ "v_python, v_javascript, v_ruby, v_php, v_csharp, v_cmais, v_c, "
+					+ "d_python, d_javascript, d_ruby, d_php, d_csharp, d_cmais, d_c, "
+					+ "a_python, a_javascript, a_ruby, a_php, a_csharp, a_cmais, a_c, "
+					+ "bug_q1, bug_q2, bug_q3, bug_q4, "
+					+ "dev_q1, dev_q2, dev_q3, dev_q4) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			insert.setString(1, painelJavaLar.getPlano().getNome());
+			insert.setString(2, painelJavaLar.getPlano().getMatricula() + "");
+			insert.setString(3, actionController.getArquivo());
+
+			int i = 4;
+			for (Planeta planeta : planetas) {
+				if (planeta.getNome().equals("Java") == false) {
+					insert.setInt(i, planeta.getBugsColididos());
+					i++;
 				}
-				for(Planeta planeta : planetas) {
-					if(planeta.getNome().equals("Java")==false) {
-						insert.setInt(i, planeta.getDevsColididos());
-						i++;
-					}
-				}
-				for(Planeta planeta : planetas) {
-					if(planeta.getNome().equals("Java")==false) {
-						insert.setInt(i, (int) planeta.getMovimento());
-						i++;
-					}
-				}
-				for(Planeta planeta : planetas) {
-					if(planeta.getNome().equals("Java")==false) {
-						insert.setInt(i, (int) planeta.getTempoRodado());
-						i++;
-					}
-				}
-				for(Planeta planeta : planetas) {
-					if(planeta.getNome().equals("Java")==false) {
-						insert.setInt(i, planeta.getAnos());
-						i++;
-					}
-				}
-				insert.setInt(39, painelJavaLar.getPlano().getQuadranteBug1());
-				insert.setInt(40, painelJavaLar.getPlano().getQuadranteBug2());
-				insert.setInt(41, painelJavaLar.getPlano().getQuadranteBug3());
-				insert.setInt(42, painelJavaLar.getPlano().getQuadranteBug4());
-				insert.setInt(43, painelJavaLar.getPlano().getQuadranteDev1());
-				insert.setInt(44, painelJavaLar.getPlano().getQuadranteDev2());
-				insert.setInt(45, painelJavaLar.getPlano().getQuadranteDev3());
-				insert.setInt(46, painelJavaLar.getPlano().getQuadranteDev4());
-				
-				insert.execute();
-				conexao.close();
-				
-			} catch (SQLException exception) {
-				exception.printStackTrace();
 			}
-		
+			for (Planeta planeta : planetas) {
+				if (planeta.getNome().equals("Java") == false) {
+					insert.setInt(i, planeta.getDevsColididos());
+					i++;
+				}
+			}
+			for (Planeta planeta : planetas) {
+				if (planeta.getNome().equals("Java") == false) {
+					insert.setInt(i, (int) planeta.getMovimento());
+					i++;
+				}
+			}
+			for (Planeta planeta : planetas) {
+				if (planeta.getNome().equals("Java") == false) {
+					insert.setInt(i, (int) planeta.getTempoRodado());
+					i++;
+				}
+			}
+			for (Planeta planeta : planetas) {
+				if (planeta.getNome().equals("Java") == false) {
+					insert.setInt(i, planeta.getAnos());
+					i++;
+				}
+			}
+			insert.setInt(39, painelJavaLar.getPlano().getQuadranteBug1());
+			insert.setInt(40, painelJavaLar.getPlano().getQuadranteBug2());
+			insert.setInt(41, painelJavaLar.getPlano().getQuadranteBug3());
+			insert.setInt(42, painelJavaLar.getPlano().getQuadranteBug4());
+			insert.setInt(43, painelJavaLar.getPlano().getQuadranteDev1());
+			insert.setInt(44, painelJavaLar.getPlano().getQuadranteDev2());
+			insert.setInt(45, painelJavaLar.getPlano().getQuadranteDev3());
+			insert.setInt(46, painelJavaLar.getPlano().getQuadranteDev4());
+
+			insert.execute();
+			conexao.close();
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
+	}
+
+	public void analisarDados() {
+		try {
+			Connection conexao = new Conexão().getConexao();
+			
+			
+			
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
 		}
 	}
-
+}
