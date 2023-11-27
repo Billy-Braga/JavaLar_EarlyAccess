@@ -15,6 +15,11 @@ import view.PainelJavaLar;
 
 public class JanelaJavaLar extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	static {
 		try {
 			String str = "javax.swing.plaf.nimbus.NimbusLookAndFeel";

@@ -125,7 +125,7 @@ public class JavaLarDAO {
 		}
 	}
 
-	public void gravarSaída() {
+	public void gravarDados() {
 		
 		System.out.println("1) Campeão de análises: " + combinacaoMaisRepetida);
 		System.out.println("2) Planeta que mais morreu: ");

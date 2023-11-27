@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.ImageIcon;
-
 public class Python extends Planeta {
 	private int direcao;
 

@@ -10,21 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import view.PainelJavaLar;
-
 public class Plano {
 	public ArrayList<Célula> listaCélulas;
 	public List<Planeta> planetas = new ArrayList<>();
 	public ArrayList<Bugs> listaBugs = new ArrayList<>();
 	public ArrayList<Devs> listaDevs = new ArrayList<>();
 	public ArrayList<Planeta> falecidos= new ArrayList<>();
-	private ArrayList<int[]> valoresConvertidos = new ArrayList<>();
-	private PainelJavaLar painelJavaLar;
 	public int[] quadranteBug= new int[4];
 	public int[] quadranteDev= new int [4];
 	public String nome = "Enzo";
 	public int matricula = 540602;
-
 
 	public Plano() {
 

@@ -1,6 +1,5 @@
 package view;
 
-import control.Conexão;
 import control.JanelaJavaLar;
 
 public class Main {

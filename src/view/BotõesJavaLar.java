@@ -8,6 +8,11 @@ import javax.swing.JButton;
 
 public class BotõesJavaLar extends JButton {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public BotõesJavaLar(String string) {
 
 		this.setFont(new Font("arial", Font.BOLD, 13));

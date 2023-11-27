@@ -2,26 +2,15 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import control.ActionController;
-import control.JavaLarDAO;
-import model.Bugs;
-import model.Devs;
 import model.Planeta;
 import model.Plano;
 
@@ -29,18 +18,7 @@ public class PainelBotões extends JPanel {
 
 	private BotõesJavaLar botãoInstante, botãoLerArquivo, botãoRelatório, botãoLerDados, botãoGravar;
 	private List<Planeta> planetas;
-	private List<Planeta> falecidos;
-	private int indexPlaneta = 0;
-	private ArrayList<Bugs> listaBugs = new ArrayList<>();
-	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
-	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
 	private PainelJavaLar painelJavaLar;
-	private int quantidadeBugs = 0;
-	private int quantidadeDevs = 0;
-	private JavaLarDAO relatório;
-	private String arquivo;
-	private JLabel instantes;
-	private JLabel título;
 	private Plano plano;
 	private ActionController controle;
 

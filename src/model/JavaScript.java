@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.ImageIcon;
-
 public class JavaScript extends Planeta {
 	private int direcao;
 

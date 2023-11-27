@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.ImageIcon;
-
 class C extends Planeta {
 	private int direcao;
 

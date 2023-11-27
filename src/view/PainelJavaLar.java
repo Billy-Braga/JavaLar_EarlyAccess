@@ -9,7 +9,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import model.Célula;
-import model.Planeta;
 import model.Plano;
 
 public class PainelJavaLar extends JPanel {

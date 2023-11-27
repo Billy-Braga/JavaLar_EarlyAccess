@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import view.PainelJavaLar;
-
 public abstract class Planeta {
 	protected String nome;
 	protected int x;
@@ -22,10 +20,6 @@ public abstract class Planeta {
 	private int bugsColididos;
 	private int devsColididos;
 	protected int instantes;
-	private ImageIcon imageIcon;
-	private PainelJavaLar painelJavaLar;
-	private Plano plano;
-	private int movimentomax;
 	private ImageIcon imagem;
 
 	public Planeta(String nome, int x, int y, int movimento, double rotação, String caminhoImagem) {
@@ -39,8 +33,6 @@ public abstract class Planeta {
 		this.anoPorRodada = 0;
 		this.tempoRodado = 0;
 		this.instantes = 0;
-		this.painelJavaLar = painelJavaLar;
-		this.plano = plano;
 		bugsColididos = 0;
 		devsColididos = 0;
 	}

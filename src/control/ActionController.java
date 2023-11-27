@@ -21,15 +21,11 @@ public class ActionController implements ActionListener {
 	private PainelBotões painelBotões;
 	private Plano plano;
 	private List<Planeta> planetas;
-	private List<Planeta> falecidos;
 	private int indexPlaneta = 0;
-	private ArrayList<Bugs> listaBugs = new ArrayList<>();
-	private ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
-	private ArrayList<Devs> devsRemovidos = new ArrayList<>();
 	private PainelJavaLar painelJavaLar;
 	private int quantidadeBugs = 0;
 	private int quantidadeDevs = 0;
-	private JavaLarDAO relatório;
+	private JavaLarDAO dadosDAO;
 	private String arquivo;
 
 	public ActionController(List<Planeta> planetas, PainelJavaLar painelJavaLar, PainelBotões painelBotões) {
@@ -37,7 +33,7 @@ public class ActionController implements ActionListener {
 		this.painelBotões = painelBotões;
 		this.planetas = planetas;
 		this.painelJavaLar = painelJavaLar;
-		relatório = new JavaLarDAO(plano, planetas, painelJavaLar, this);
+		dadosDAO = new JavaLarDAO(plano, planetas, painelJavaLar, this);
 	}
 
 	@Override
@@ -111,15 +107,15 @@ public class ActionController implements ActionListener {
 
 		}
 		if (e.getSource() == painelBotões.getBotãoRelatório()) {
-			relatório.inserirDados(plano, planetas);
+			dadosDAO.inserirDados(plano, planetas);
 		}
 
 		if (e.getSource() == painelBotões.getBotãoLerDados()) {
-			relatório.analisarDados();
+			dadosDAO.analisarDados();
 		}
 
 		if (e.getSource() == painelBotões.getBotãoGravar()) {
-			relatório.gravarSaída();
+			dadosDAO.gravarDados();
 		}
 
 	}

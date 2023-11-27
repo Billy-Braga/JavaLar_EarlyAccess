@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.ImageIcon;
-
 class PHP extends Planeta {
 	private int direcao;
 
