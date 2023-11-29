@@ -31,7 +31,7 @@ public class PainelBotões extends JPanel {
 		botãoInstante = new BotõesJavaLar("Processar próximo instante");
 		botãoLerArquivo = new BotõesJavaLar("Ler novo arquivo de entrada");
 		botãoRelatório = new BotõesJavaLar("Gravar Relatório");
-		botãoLerDados = new BotõesJavaLar("Ler dados de outros\n participantes");
+		botãoLerDados = new BotõesJavaLar("Ler dados de outros cidadãos");
 		botãoGravar = new BotõesJavaLar("Gravar arquivo de saída");
 		this.setBackground(new Color(21, 21, 43));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

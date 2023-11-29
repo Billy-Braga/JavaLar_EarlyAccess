@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import model.DadosRelatório;
 import model.Planeta;
 import model.Plano;
 import view.PainelBotões;
@@ -18,6 +20,17 @@ public class JavaLarDAO {
 	private PainelBotões painelBotões;
 	private ActionController actionController;
 	private String combinacaoMaisRepetida;
+	private int planetaZikado;
+	private int planetaIluminado;
+	private int mediaPython;
+	private int mediaJavaScript;
+	private int mediaRuby;
+	private int mediaPHP;
+	private int mediaCsharp;
+	private int mediaCplusplus;
+	private int mediaC;
+	private int maiorQuadranteBugs;
+	private int maiorQuadranteDevs;
 	private int totalInstantes;
 	private int somaDevsTotais;
 	private int somaBugsTotais;
@@ -97,46 +110,88 @@ public class JavaLarDAO {
 
 	}
 
-	public void analisarDados() {
+	public ArrayList<DadosRelatório> selecionarDados(){
+		ArrayList<DadosRelatório> dadosRelatório = new ArrayList<DadosRelatório>();
+		String indices[] = formatarString().split(", ");
+		String [] informacoes = new String[indices.length];
+		
 		try {
 			Connection conexao = new Conexão().getConexao();
-			String sql = "SELECT " + "CONCAT(nome, '|', matricula) AS combinacao, " + "COUNT(*) AS contagem, "
-					+ "SUM(a_python + a_javascript + a_ruby + a_php + a_csharp + a_cmais + a_c) AS somaAnosTotais, "
-					+ "SUM(dev_python + dev_javascript + dev_ruby + dev_php + dev_csharp + dev_cmais + dev_c) AS somaDevsTotais, "
-					+ "SUM(bug_python + bug_javascript + bug_ruby + bug_php + bug_csharp + bug_cmais + bug_c) AS somaBugsTotais, "
-					+ "SUM(d_python + d_javascript + d_ruby + d_php + d_csharp + d_cmais + d_c) AS somaDiasTotais "
-					+ "FROM javalar GROUP BY combinacao ORDER BY contagem DESC LIMIT 1";
 
-			PreparedStatement statement = conexao.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
+			String query = "select * from javalar order by id desc";
+			ResultSet dados = conexao.prepareStatement(query).executeQuery();
 
-			if (resultSet.next()) {
-			    combinacaoMaisRepetida = resultSet.getString("combinacao");
-				somaDevsTotais = resultSet.getInt("somaDevsTotais");
-				somaBugsTotais = resultSet.getInt("somaBugsTotais");
-				somaAnosTotais = resultSet.getInt("somaAnosTotais");
-				somaDiasTotais = resultSet.getDouble("somaDiasTotais");
+			while (dados.next()) {
+				String nome = dados.getString("nome");
+				int matricula = dados.getInt("matricula");
+				String nome_arquivo	= dados.getString("nome_arquivo");
+				
+				for(int i=0;i<indices.length-1;i++) {
+				informacoes[i] = dados.getString(indices[i]);
+				}
+				informacoes[indices.length-1] = dados.getString("dev_q4");
+
+				DadosRelatório dr = new DadosRelatório(nome, matricula, nome_arquivo, informacoes);
+				dadosRelatório.add(dr);
 			}
-
 			conexao.close();
-
-		} catch (SQLException exception) {
-			exception.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-	}
 
-	public void gravarDados() {
+		return dadosRelatório;
+	}
+	
+	
+	public void escreverDados(ArrayList<DadosRelatório> dadosRelatório) {
+	    EscreverDados e = new EscreverDados();
+	    StringBuilder stringBuilder = new StringBuilder();
+
+	    for (DadosRelatório dr : dadosRelatório) {
+	        stringBuilder.append(dr.toString());
+	    }
+
+	    e.escreverDados("C:/Users/enzov/Downloads/Dados/dadosFinais.txt", stringBuilder.toString());
+	}
+	
+
+	private String formatarString() {
 		
-		System.out.println("1) Campeão de análises: " + combinacaoMaisRepetida);
-		System.out.println("2) Planeta que mais morreu: ");
-		System.out.println("3) Planeta com mais vida: ");
-		System.out.println("4) Quadrante com mais Bugs: ");
-		System.out.println("5) Quadrante com mais Devs: ");
-		System.out.println("6) Soma total de Instantes : ");
-		System.out.println("7) Média de velocidade de cada planeta: ");
-		System.out.println("8) Quantidade total de Devs: " + somaDevsTotais);
-		System.out.println("9) Quantidade total de Bugs: " + somaBugsTotais);
-		System.out.println("10) Soma total de Horas dos planetas: " + String.format("%.2f", somaDiasTotais / 24.0));
-		System.out.println("11) Soma total de Anos dos planetas: " + somaAnosTotais);
+		String[] nomePlanetas = new String[7];
+		nomePlanetas[0] = "python";
+		nomePlanetas[1] = "javascript";
+		nomePlanetas[2] = "ruby";
+		nomePlanetas[3] = "php";
+		nomePlanetas[4] = "csharp";
+		nomePlanetas[5] = "cmais";
+		nomePlanetas[6] = "c";
+
+		String[] nomeAux = new String[5];
+		nomeAux[0] = "bug_";
+		nomeAux[1] = "dev_";
+		nomeAux[2] = "v_";
+		nomeAux[3] = "d_";
+		nomeAux[4] = "a_";
+		String stringDados ="";
+		
+		for (int i = 0; i < nomeAux.length; i++) {
+			for (int j = 0; j < nomePlanetas.length; j++) {
+				stringDados += nomeAux[i] + nomePlanetas[j] + ", ";
+			}
+		}
+		for (int i = 0; i < 2; i++) {
+			for (int j = 1; j <= 4; j++) {
+
+				stringDados += nomeAux[i] + "q" + j;
+
+				if (i == 1 && j == 4)
+					stringDados += " ";
+				else
+					stringDados += ", ";
+			}
+		}
+		
+		return stringDados;
 	}
 }

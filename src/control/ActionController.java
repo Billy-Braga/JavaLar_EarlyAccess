@@ -1,5 +1,7 @@
 package control;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -7,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import model.Bugs;
+import model.DadosRelatório;
 import model.Devs;
 import model.Planeta;
 import model.Plano;
@@ -27,6 +34,9 @@ public class ActionController implements ActionListener {
 	private int quantidadeDevs = 0;
 	private JavaLarDAO dadosDAO;
 	private String arquivo;
+	private ArrayList<DadosRelatório> dadosObtidos;
+	private JLabel aviso;
+	private boolean arquivoLido=false;
 
 	public ActionController(List<Planeta> planetas, PainelJavaLar painelJavaLar, PainelBotões painelBotões) {
 		this.plano = new Plano();
@@ -34,16 +44,29 @@ public class ActionController implements ActionListener {
 		this.planetas = planetas;
 		this.painelJavaLar = painelJavaLar;
 		dadosDAO = new JavaLarDAO(plano, planetas, painelJavaLar, this);
+		aviso = new JLabel();
+		aviso.setForeground(Color.WHITE);
+		aviso.setText("Meu fi, selecione o arquivo, por gentileza");
+		aviso.setFont(new Font("Old English Text MT",Font.PLAIN,18));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		ArrayList<Bugs> bugsRemovidos = new ArrayList<>();
 		ArrayList<Devs> devsRemovidos = new ArrayList<>();
 		List<Planeta> falecidos = new ArrayList<>();
 
 		if (e.getSource() == painelBotões.getBotãoInstante()) {
+			
+			 if (!arquivoLido) {
+
+		            UIManager.put("OptionPane.informationIcon", new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\fesch.png"));
+		            JOptionPane.showMessageDialog(null, aviso, "                         Tu esqueceu do arquivo meu chapa!!", JOptionPane.INFORMATION_MESSAGE);
+		            UIManager.put("OptionPane.informationIcon", UIManager.getIcon("OptionPane.informationIcon"));
+
+		            return;
+		        }else {
 			for (Planeta planeta : planetas) {
 				planeta.mover();
 				planeta.rotacionar();
@@ -64,7 +87,7 @@ public class ActionController implements ActionListener {
 			painelJavaLar.getPlano().verificarColisãoDevs((List<Planeta>) planetas, (ArrayList<Devs>) devsRemovidos);
 			painelJavaLar.getPlano().explodirPlanetas((List<Planeta>) planetas, (ArrayList<Planeta>) falecidos);
 			painelJavaLar.getPlano().analisarQuadrantes();
-
+		        }
 		}
 		if (e.getSource() == painelBotões.getBotãoLerArquivo()) {
 			JFileChooser fileChooser = new JFileChooser();
@@ -99,6 +122,7 @@ public class ActionController implements ActionListener {
 						quantidadeBugs = Integer.parseInt(componentes[componentes.length - 2]);
 						quantidadeDevs = Integer.parseInt(componentes[componentes.length - 1]);
 					}
+					arquivoLido=true;
 
 				} catch (IOException | NumberFormatException ex) {
 					ex.printStackTrace();
@@ -108,14 +132,39 @@ public class ActionController implements ActionListener {
 		}
 		if (e.getSource() == painelBotões.getBotãoRelatório()) {
 			dadosDAO.inserirDados(plano, planetas);
+			JLabel sucesso = new JLabel();
+			sucesso.setText("Sucesso, mestre 😎");
+			sucesso.setForeground(Color.WHITE);
+			sucesso.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+			JOptionPane.showMessageDialog(null, sucesso, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 		if (e.getSource() == painelBotões.getBotãoLerDados()) {
-			dadosDAO.analisarDados();
+			try {
+				DadosRelatório dados = new DadosRelatório();
+				dadosObtidos = dados.buscarOsDados();
+				JLabel dadosLidos = new JLabel();
+				dadosLidos.setText("Dados Computados, minha altarquia ");
+				dadosLidos.setForeground(Color.WHITE);
+				dadosLidos.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+				JOptionPane.showMessageDialog(null, dadosLidos, "Dados perfeitamente lidos", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e2) {
+				
+			}
 		}
 
 		if (e.getSource() == painelBotões.getBotãoGravar()) {
-			dadosDAO.gravarDados();
+			try {
+				DadosRelatório dados = new DadosRelatório();
+				dados.enviarDados(dadosObtidos);
+				JLabel dadosEnviados = new JLabel();
+				dadosEnviados.setText("Dados enviados, meu grande Messias!");
+				dadosEnviados.setForeground(Color.WHITE);
+				dadosEnviados.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+				JOptionPane.showMessageDialog(null, dadosEnviados, "Dados enviados com extremo sucesso", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e2) {
+				
+			}
 		}
 
 	}

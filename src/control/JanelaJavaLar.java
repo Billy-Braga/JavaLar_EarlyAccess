@@ -2,8 +2,12 @@ package control;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.File;
 import java.util.List;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -35,9 +39,12 @@ public class JanelaJavaLar extends JFrame {
 	private PainelBotões painelBotões;
 	private PainelFundo painelFundo;
 	private PainelJavaLar painelJavaLar;
+	private String filepath;
 
 	public JanelaJavaLar() {
 
+		filepath = "C:\\Users\\enzov\\Downloads\\gta.wav";
+		tocarMúsica(filepath);
 		Plano plano = new Plano();
 		List<Planeta> planetas = Planeta.criarPlanetas();
 
@@ -56,5 +63,18 @@ public class JanelaJavaLar extends JFrame {
 		this.setVisible(true);
 		this.add(painelBotões, BorderLayout.EAST);
 		this.add(painelFundo, BorderLayout.CENTER);
+
+	}
+
+	private static void tocarMúsica(String location) {
+		try {
+			File musicPath = new File(location);
+			AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInput);
+			clip.start();
+		} catch (Exception e) {
+
+		}
 	}
 }
