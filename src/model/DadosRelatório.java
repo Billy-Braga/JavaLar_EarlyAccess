@@ -64,8 +64,6 @@ public class DadosRelatório {
 	public void enviarDados(ArrayList<DadosRelatório> listaDados) {
 		EscreverDados e = new EscreverDados();
 
-		ArrayList<String> nomes = new ArrayList<>();
-		nomes.add(listaDados.get(0).getNome());
 		String[] planetas = { "Python", "Javascript", "Ruby", "Php", "C#", "C++", "C" };
 		String planetaAmaldiçoado = "";
 		String nomeCampeãoDeVendas = "";
@@ -85,22 +83,22 @@ public class DadosRelatório {
 					contExplosao[i]++;
 				}
 
-				velocidadeMediaPlanetas[i] += Integer.parseInt(dadosRelatório.infos[i + 14]); // obter velocidade media
-																								// de cada planeta
+				velocidadeMediaPlanetas[i] += Integer.parseInt(dadosRelatório.infos[i + 14]); 
 
-				horasTotais += Integer.parseInt(dadosRelatório.infos[i + 21]);// 10 - horas totais dos planetas
-				anosTotais += Integer.parseInt(dadosRelatório.infos[i + 28]);// 11 - anos totais dos planetas
+				horasTotais += Integer.parseInt(dadosRelatório.infos[i + 21]);
+				anosTotais += Integer.parseInt(dadosRelatório.infos[i + 28]);
 			}
 
-			int maiorValor = Integer.parseInt(dadosRelatório.infos[14]);// valor inicial de vida
+			int maiorValor = Integer.parseInt(dadosRelatório.infos[14]);
 
 			for (int i = 14; i < 21; i++) {
-				if (Integer.parseInt(dadosRelatório.infos[i]) > maiorValor) {// olhando qual planeta tem mais vida
+				if (Integer.parseInt(dadosRelatório.infos[i]) > maiorValor) {
 					maiorValor = Integer.parseInt(dadosRelatório.infos[i]);
 					indiceMaiorValor = i;
 				}
 			}
-
+			planetaAmaldiçoado = planetas[encontrarMaiorValor(contExplosao)];
+			
 			for (int i = 35; i < 43; i++) {
 				if (i < 39)
 					bugsTotais[i - 35] += Integer.parseInt(dadosRelatório.infos[i]);
@@ -110,16 +108,19 @@ public class DadosRelatório {
 			}
 
 		}
-		planetaAmaldiçoado = planetas[encontrarMaiorValor(contExplosao)];
+		
+		
 		int maxContagem = 0;
-		for (String nomeUnico : nomes) {/// olhar nome mais frequente
-			int contagem = contarRepetidos(nomeUnico, listaDados);
+		for (DadosRelatório dadosRelatório : listaDados) {
+		    String nomeAtual = dadosRelatório.getNome().trim();
+		    int contagem = contarRepetidos(nomeAtual, listaDados);
 
-			if (contagem > maxContagem) {
-				maxContagem = contagem;
-				nomeCampeãoDeVendas = nomeUnico;
-			}
+		    if (contagem > maxContagem) {
+		        maxContagem = contagem;
+		        nomeCampeãoDeVendas = nomeAtual;
+		    }
 		}
+		
 		for (DadosRelatório dadosRelatório : listaDados) {
 			if (nomeCampeãoDeVendas.equals(dadosRelatório.getNome()) == true)
 				matrículaCampeã = dadosRelatório.getMatricula();

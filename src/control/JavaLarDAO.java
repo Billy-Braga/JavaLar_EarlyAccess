@@ -19,23 +19,6 @@ public class JavaLarDAO {
 	private PainelJavaLar painelJavaLar;
 	private PainelBotões painelBotões;
 	private ActionController actionController;
-	private String combinacaoMaisRepetida;
-	private int planetaZikado;
-	private int planetaIluminado;
-	private int mediaPython;
-	private int mediaJavaScript;
-	private int mediaRuby;
-	private int mediaPHP;
-	private int mediaCsharp;
-	private int mediaCplusplus;
-	private int mediaC;
-	private int maiorQuadranteBugs;
-	private int maiorQuadranteDevs;
-	private int totalInstantes;
-	private int somaDevsTotais;
-	private int somaBugsTotais;
-	private int somaAnosTotais;
-	private double somaDiasTotais;
 
 	public JavaLarDAO(Plano plano, List<Planeta> planetas, PainelJavaLar painelJavaLar,
 			ActionController actionController) {
@@ -143,19 +126,6 @@ public class JavaLarDAO {
 		return dadosRelatório;
 	}
 	
-	
-	public void escreverDados(ArrayList<DadosRelatório> dadosRelatório) {
-	    EscreverDados e = new EscreverDados();
-	    StringBuilder stringBuilder = new StringBuilder();
-
-	    for (DadosRelatório dr : dadosRelatório) {
-	        stringBuilder.append(dr.toString());
-	    }
-
-	    e.escreverDados("C:/Users/enzov/Downloads/Dados/dadosFinais.txt", stringBuilder.toString());
-	}
-	
-
 	private String formatarString() {
 		
 		String[] nomePlanetas = new String[7];

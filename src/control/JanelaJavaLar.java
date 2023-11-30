@@ -39,12 +39,10 @@ public class JanelaJavaLar extends JFrame {
 	private PainelBotões painelBotões;
 	private PainelFundo painelFundo;
 	private PainelJavaLar painelJavaLar;
-	private String filepath;
+
 
 	public JanelaJavaLar() {
 
-		filepath = "C:\\Users\\enzov\\Downloads\\gta.wav";
-		tocarMúsica(filepath);
 		Plano plano = new Plano();
 		List<Planeta> planetas = Planeta.criarPlanetas();
 
@@ -64,17 +62,5 @@ public class JanelaJavaLar extends JFrame {
 		this.add(painelBotões, BorderLayout.EAST);
 		this.add(painelFundo, BorderLayout.CENTER);
 
-	}
-
-	private static void tocarMúsica(String location) {
-		try {
-			File musicPath = new File(location);
-			AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInput);
-			clip.start();
-		} catch (Exception e) {
-
-		}
 	}
 }

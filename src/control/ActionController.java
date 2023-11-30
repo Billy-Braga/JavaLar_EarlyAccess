@@ -132,22 +132,14 @@ public class ActionController implements ActionListener {
 		}
 		if (e.getSource() == painelBotões.getBotãoRelatório()) {
 			dadosDAO.inserirDados(plano, planetas);
-			JLabel sucesso = new JLabel();
-			sucesso.setText("Sucesso, mestre 😎");
-			sucesso.setForeground(Color.WHITE);
-			sucesso.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
-			JOptionPane.showMessageDialog(null, sucesso, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			dadosComputadosLabel();
 		}
 
 		if (e.getSource() == painelBotões.getBotãoLerDados()) {
 			try {
 				DadosRelatório dados = new DadosRelatório();
 				dadosObtidos = dados.buscarOsDados();
-				JLabel dadosLidos = new JLabel();
-				dadosLidos.setText("Dados Computados, minha altarquia ");
-				dadosLidos.setForeground(Color.WHITE);
-				dadosLidos.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
-				JOptionPane.showMessageDialog(null, dadosLidos, "Dados perfeitamente lidos", JOptionPane.INFORMATION_MESSAGE);
+				dadosLidosLabel();
 			} catch (Exception e2) {
 				
 			}
@@ -157,16 +149,36 @@ public class ActionController implements ActionListener {
 			try {
 				DadosRelatório dados = new DadosRelatório();
 				dados.enviarDados(dadosObtidos);
-				JLabel dadosEnviados = new JLabel();
-				dadosEnviados.setText("Dados enviados, meu grande Messias!");
-				dadosEnviados.setForeground(Color.WHITE);
-				dadosEnviados.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
-				JOptionPane.showMessageDialog(null, dadosEnviados, "Dados enviados com extremo sucesso", JOptionPane.INFORMATION_MESSAGE);
+				dadosEnviadosLabel();
 			} catch (Exception e2) {
 				
 			}
 		}
 
+	}
+
+	private void dadosComputadosLabel() {
+		JLabel sucesso = new JLabel();
+		sucesso.setText("Sucesso, mestre 😎");
+		sucesso.setForeground(Color.WHITE);
+		sucesso.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+		JOptionPane.showMessageDialog(null, sucesso, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void dadosEnviadosLabel() {
+		JLabel dadosEnviados = new JLabel();
+		dadosEnviados.setText("Dados enviados, meu grande Messias!");
+		dadosEnviados.setForeground(Color.WHITE);
+		dadosEnviados.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+		JOptionPane.showMessageDialog(null, dadosEnviados, "Dados enviados com extremo sucesso", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void dadosLidosLabel() {
+		JLabel dadosLidos = new JLabel();
+		dadosLidos.setText("Dados Computados, minha altarquia ");
+		dadosLidos.setForeground(Color.WHITE);
+		dadosLidos.setFont(new Font("Franklin Gothic Heavy",Font.PLAIN,18));
+		JOptionPane.showMessageDialog(null, dadosLidos, "Dados perfeitamente lidos", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public String getArquivo() {
