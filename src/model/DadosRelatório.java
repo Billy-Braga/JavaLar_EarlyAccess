@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import control.ActionController;
-import control.EscreverDados;
-import control.JavaLarDAO;
+import control.planetas.Planeta;
+import control.plano.Plano;
 import view.PainelJavaLar;
 
 public class DadosRelatório {

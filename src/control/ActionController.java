@@ -15,11 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import model.Bugs;
+import control.planetas.Planeta;
+import control.plano.Bugs;
+import control.plano.Devs;
+import control.plano.Plano;
 import model.DadosRelatório;
-import model.Devs;
-import model.Planeta;
-import model.Plano;
+import model.JavaLarDAO;
 import view.PainelBotões;
 import view.PainelJavaLar;
 
@@ -61,7 +62,7 @@ public class ActionController implements ActionListener {
 			
 			 if (!arquivoLido) {
 
-		            UIManager.put("OptionPane.informationIcon", new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\fesch.png"));
+		            UIManager.put("OptionPane.informationIcon", new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\view\\icones\\fesch.png"));
 		            JOptionPane.showMessageDialog(null, aviso, "                         Tu esqueceu do arquivo meu chapa!!", JOptionPane.INFORMATION_MESSAGE);
 		            UIManager.put("OptionPane.informationIcon", UIManager.getIcon("OptionPane.informationIcon"));
 

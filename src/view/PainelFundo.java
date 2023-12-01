@@ -19,7 +19,7 @@ public class PainelFundo extends JPanel {
 	public PainelFundo(PainelJavaLar painelJavaLar) {
 		this.painelJavaLar = painelJavaLar;
 
-		ImageIcon imagem = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\bomdia.gif");
+		ImageIcon imagem = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\view\\icones\\bomdia.gif");
 		JLabel estrelas = new JLabel(imagem);
 		estrelas.setAlignmentX(CENTER_ALIGNMENT);
 

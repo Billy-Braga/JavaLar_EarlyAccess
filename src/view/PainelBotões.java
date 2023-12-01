@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import control.ActionController;
-import model.Planeta;
-import model.Plano;
+import control.planetas.Planeta;
+import control.plano.Plano;
 
 public class PainelBotões extends JPanel {
 
@@ -26,7 +26,7 @@ public class PainelBotões extends JPanel {
 
 		controle = new ActionController(planetas, painelJavaLar, this);
 
-		ImageIcon navezona = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\icons\\talvez.gif");
+		ImageIcon navezona = new ImageIcon("C:\\Users\\enzov\\eclipse-workspace\\ProvaFinal\\src\\view\\icones\\talvez.gif");
 
 		botãoInstante = new BotõesJavaLar("Processar próximo instante");
 		botãoLerArquivo = new BotõesJavaLar("Ler novo arquivo de entrada");

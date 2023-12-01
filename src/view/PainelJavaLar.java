@@ -8,8 +8,8 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import model.Célula;
-import model.Plano;
+import control.plano.Célula;
+import control.plano.Plano;
 
 public class PainelJavaLar extends JPanel {
 
